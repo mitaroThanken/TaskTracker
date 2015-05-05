@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Task Tracker",
+    "description": "The name of the application"
+  },
+  "appDescription": {
+    "message": "TaskChute helper for Chrome",
+    "description": "The description of the application"
+  }
+}
