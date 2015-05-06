@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 
         shell: {
             run: {
-                command: 'cfx run --pkgdir=<%= config.app %>'
+                command: 'cfx run --pkgdir=<%= config.app %> -b /Applications/FirefoxDeveloperEdition.app/Contents/MacOS/firefox-bin'
             },
             xpi: {
                 command: [
