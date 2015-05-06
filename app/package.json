@@ -1,0 +1,9 @@
+{
+    "name": "tasktracker",
+    "id": "extensionname@example.org",
+    "title": "TaskTracker",
+    "description": "TaskChute helper for Firefox",
+    "author": "YAMAMI Taro",
+    "license": "MPL 2.0",
+    "version": "0.1.0"
+}
