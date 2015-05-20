@@ -13,9 +13,9 @@ var button = require("sdk/ui/button/toggle").ToggleButton({
   id: "show-panel",
   label: "Show Panel",
   icon: {
-    "16": "./icon-16.png",
-    "32": "./icon-32.png",
-    "64": "./icon-64.png"
+    "16": "./images/icon-16.png",
+    "32": "./images/icon-32.png",
+    "64": "./images/icon-64.png"
   },
   onChange: handleChange
 });
