@@ -9,6 +9,13 @@
     "firefox": ">=38.0a1",
     "fennec": ">=38.0a1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mitaroThanken/TaskTracker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mitaroThanken/TaskTracker/issues"
+  },
   "license": "MIT",
   "dependencies": {
     "flux": "^2.0.3",
