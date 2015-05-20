@@ -4,11 +4,12 @@ var data = require("sdk/self").data;
 // into it.
 var text_entry = require("sdk/panel").Panel({
   contentURL: data.url("text-entry.html"),
-  contentScriptFile: data.url("js/get-text.js")
+  contentScriptFile: data.url("js/get-text.js"),
+  onHide: handleHide
 });
 
 // Create a button
-require("sdk/ui/button/action").ActionButton({
+var button = require("sdk/ui/button/toggle").ToggleButton({
   id: "show-panel",
   label: "Show Panel",
   icon: {
@@ -16,21 +17,20 @@ require("sdk/ui/button/action").ActionButton({
     "32": "./icon-32.png",
     "64": "./icon-64.png"
   },
-  onClick: handleClick
+  onChange: handleChange
 });
 
-// Show the panel when the user clicks the button.
-function handleClick(state) {
-  text_entry.show();
+function handleChange(state) {
+  if (state.checked) {
+    text_entry.show({
+      position: button
+    });
+  }
 }
 
-// When the panel is displayed it generated an event called
-// "show": we will listen for that event and when it happens,
-// send our own "show" event to the panel's script, so the
-// script can prepare the panel for display.
-text_entry.on("show", function() {
-  text_entry.port.emit("show");
-});
+function handleHide() {
+  button.state('window', {checked: false});
+}
 
 // Listen for messages called "text-entered" coming from
 // the content script. The message payload is the text the user
