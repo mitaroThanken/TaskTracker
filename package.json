@@ -9,5 +9,9 @@
     "firefox": ">=38.0a1",
     "fennec": ">=38.0a1"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "flux": "^2.0.3",
+    "react": "^0.13.3"
+  }
 }
