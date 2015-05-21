@@ -31,8 +31,10 @@
     "watchify": "^3.2.1"
   },
   "scripts": {
-    "start": "watchify -o data/js/index.js -v -d src/index.js --no-bundle-external",
-    "build": "browserify ./src/ -t [ envify --NODE_ENV production ] --no-bundle-external | uglifyjs -cm > data/js/index.min.js",
+    "start-index": "watchify -o data/js/index.js -v -d src/index.js --no-bundle-external",
+    "build-index": "browserify ./src/index.js -t [ envify --NODE_ENV production ] --no-bundle-external | uglifyjs -cm > data/js/index.min.js",
+    "start-app": "watchify -o data/js/TodoAppBundle.js -v -d src/app.js",
+    "build-app": "browserify ./src/app.js -t [ envify --NODE_ENV production ] | uglifyjs -cm > data/js/TodoAppBundle.min.js",
     "test": "jest"
   },
   "browserify": {
@@ -42,6 +44,6 @@
     ]
   },
   "jest": {
-    "rootDir": "./data/js"
+    "rootDir": "./src"
   }
 }
