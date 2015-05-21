@@ -3,11 +3,10 @@
   "name": "tasktracker",
   "version": "0.0.1",
   "description": "TaskChute helper",
-  "main": "index.js",
+  "main": "./data/js/index.js",
   "author": "mitaroThanken",
   "engines": {
-    "firefox": ">=38.0a1",
-    "fennec": ">=38.0a1"
+    "firefox": ">=38.0a1"
   },
   "repository": {
     "type": "git",
@@ -19,6 +18,32 @@
   "license": "MIT",
   "dependencies": {
     "flux": "^2.0.3",
+    "keymirror": "^0.1.1",
+    "object-assign": "^2.0.0",
     "react": "^0.13.3"
+  },
+  "devDependencies": {
+    "browserify": "^10.2.1",
+    "envify": "^3.4.0",
+    "jest-cli": "^0.4.5",
+    "reactify": "^1.1.1",
+    "uglify-js": "^2.4.22",
+    "watchify": "^3.2.1"
+  },
+  "scripts": {
+    "start-index": "watchify -o data/js/index.js -v -d src/index.js --no-bundle-external",
+    "build-index": "browserify ./src/index.js -t [ envify --NODE_ENV production ] --no-bundle-external | uglifyjs -cm > data/js/index.min.js",
+    "start-app": "watchify -o data/js/TodoAppBundle.js -v -d src/app.js",
+    "build-app": "browserify ./src/app.js -t [ envify --NODE_ENV production ] | uglifyjs -cm > data/js/TodoAppBundle.min.js",
+    "test": "jest"
+  },
+  "browserify": {
+    "transform": [
+      "reactify",
+      "envify"
+    ]
+  },
+  "jest": {
+    "rootDir": "./src"
   }
 }

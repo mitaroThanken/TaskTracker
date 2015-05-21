@@ -3,8 +3,8 @@ var data = require("sdk/self").data;
 // file in the "data" directory, and loading the "get-text.js" script
 // into it.
 var text_entry = require("sdk/panel").Panel({
-  contentURL: data.url("text-entry.html"),
-  contentScriptFile: data.url("js/get-text.js"),
+  contentURL: data.url("TodoApp.html"),
+  contentScriptFile: data.url("js/TodoAppBundle.js"),
   onHide: handleHide
 });
 
@@ -26,17 +26,8 @@ function handleChange(state) {
       position: button
     });
   }
-}
+};
 
 function handleHide() {
   button.state('window', {checked: false});
-}
-
-// Listen for messages called "text-entered" coming from
-// the content script. The message payload is the text the user
-// entered.
-// In this implementation we'll just log the text to the console.
-text_entry.port.on("text-entered", function (text) {
-  console.log(text);
-  text_entry.hide();
-});
+};
