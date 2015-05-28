@@ -27,16 +27,16 @@
   "devDependencies": {
     "browserify": "^10.2.1",
     "envify": "^3.4.0",
+    "gulp": "^3.8.11",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-uglify": "^1.2.0",
     "jest-cli": "^0.4.5",
     "reactify": "^1.1.1",
-    "uglify-js": "^2.4.22",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.2.1"
   },
   "scripts": {
-    "start-index": "watchify -o data/js/index.js -v -d src/index.js --no-bundle-external",
-    "build-index": "browserify ./src/index.js -t [ envify --NODE_ENV production ] --no-bundle-external | uglifyjs -cm > data/js/index.min.js",
-    "start-app": "watchify -o data/js/TodoAppBundle.js -v -d src/app.js",
-    "build-app": "browserify ./src/app.js -t [ envify --NODE_ENV production ] | uglifyjs -cm > data/js/TodoAppBundle.min.js",
     "test": "jest"
   },
   "browserify": {
