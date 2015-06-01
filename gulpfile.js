@@ -7,17 +7,20 @@ var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 
 var path = {
-  HTML: 'src/TodoApp.html',
-  ALL: ['src/*.js', 'src/**/*.js', 'src/TodoApp.html'],
-  INDEX_JS: ['src/index.js'],
-  APP_JS: ['src/app.js'],
+  ALL: ['src/*.js', 'src/**/*.js', 
+	'src/*.html', 
+	'src/css/*.css', 'src/images/*.png' ],
+  INDEX_JS: ['src/js/index.js'],
+  APP_JS: ['src/js/app.js'],
   OUT: 'js/TodoAppBundle.js',
   MINIFIED_OUT: 'js/TodoAppBundle.min.js',
+  STATIC: ['src/*.html', 'src/css/*.css', 'src/images/*.png' ],
+  BASE: 'src',
   DEST: 'data'
 };
 
 gulp.task('transform', function() {
-    browserify({
+    return browserify({
 	entries: [ path.APP_JS ],
 	transform: [ reactify ],
 	debug: true })
@@ -33,6 +36,6 @@ gulp.task('transform', function() {
 });
 
 gulp.task('copy', function() {
-    gulp.src(path.HTML)
+    return gulp.src( path.STATIC.concat(path.INDEX_JS), {base: path.BASE} )
         .pipe(gulp.dest(path.DEST));
 });
