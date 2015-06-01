@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var del = require('del');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var browserify = require('browserify');
@@ -18,6 +19,12 @@ var path = {
   BASE: 'src',
   DEST: 'data'
 };
+
+gulp.task('clean', function(cb) {
+    return del([
+        'data/**/*'
+    ], cb);
+});
 
 gulp.task('transform', function() {
     return browserify({
