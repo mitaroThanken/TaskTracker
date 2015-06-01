@@ -6,19 +6,33 @@ var reactify = require('reactify');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 
-gulp.task('default', function() {
-    return browserify({
-	    entries: ['./src/app.js'],
-	    transform: [reactify],
-	    debug: true })
-	    .transform(reactify)
-	    .bundle()
-	    .pipe(source('TodoAppBundle.js'))
-	    .pipe(buffer())
-	    .pipe(sourcemaps.init({loadmaps: true}))
-	    .pipe(uglify())
-	    .pipe(sourcemaps.write('.', {
-	        sourceMappingURLPrefix: 'resource://tasktracker/data/js/'
-	    }))
-	    .pipe(gulp.dest('data/js'));
+var path = {
+  HTML: 'src/TodoApp.html',
+  ALL: ['src/*.js', 'src/**/*.js', 'src/TodoApp.html'],
+  INDEX_JS: ['src/index.js'],
+  APP_JS: ['src/app.js'],
+  OUT: 'js/TodoAppBundle.js',
+  MINIFIED_OUT: 'js/TodoAppBundle.min.js',
+  DEST: 'data'
+};
+
+gulp.task('transform', function() {
+    browserify({
+	entries: [ path.APP_JS ],
+	transform: [ reactify ],
+	debug: true })
+	.transform(reactify)
+	.bundle()
+	.pipe(source( path.OUT ))
+	.pipe(buffer())
+        .pipe(sourcemaps.init({loadmaps: true}))
+	.pipe(sourcemaps.write('.', {
+	     sourceMappingURLPrefix: 'resource://tasktracker/data'
+	}))
+	.pipe(gulp.dest(path.DEST));
+});
+
+gulp.task('copy', function() {
+    gulp.src(path.HTML)
+        .pipe(gulp.dest(path.DEST));
 });
