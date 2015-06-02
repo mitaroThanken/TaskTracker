@@ -6,43 +6,36 @@ var browserify = require('browserify');
 var reactify = require('reactify');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
+var mergeStream = require('merge-stream');
 
-var path = {
-  ALL: ['src/*.js', 'src/**/*.js', 
-	'src/*.html', 
-	'src/css/*.css', 'src/images/*.png' ],
-  INDEX_JS: ['src/js/index.js'],
-  APP_JS: ['src/js/app.js'],
-  OUT: 'js/TodoAppBundle.js',
-  MINIFIED_OUT: 'js/TodoAppBundle.min.js',
-  STATIC: ['src/*.html', 'src/css/*.css', 'src/images/*.png' ],
-  BASE: 'src',
-  DEST: 'data'
-};
+var config = require('./config.json');
 
 gulp.task('clean', function(cb) {
     return del([
-        'data/**/*'
+        config.path.DEST + '/**/*'
     ], cb);
 });
 
 gulp.task('transform', function() {
     return browserify({
-	entries: [ path.APP_JS ],
+	entries: [ config.path.APP_JS ],
 	transform: [ reactify ],
 	debug: true })
 	.transform(reactify)
 	.bundle()
-	.pipe(source( path.OUT ))
+	.pipe(source( config.path.OUT ))
 	.pipe(buffer())
         .pipe(sourcemaps.init({loadmaps: true}))
 	.pipe(sourcemaps.write('.', {
 	     sourceMappingURLPrefix: 'resource://tasktracker/data'
 	}))
-	.pipe(gulp.dest(path.DEST));
+	.pipe(gulp.dest(config.path.DEST));
 });
 
 gulp.task('copy', function() {
-    return gulp.src( path.STATIC.concat(path.INDEX_JS), {base: path.BASE} )
-        .pipe(gulp.dest(path.DEST));
+    var static_src = gulp.src( config.path.STATIC, {base: config.path.BASE} );
+    var index_src = gulp.src( config.path.INDEX_JS, {base: config.path.BASE} );
+
+    return mergeStream( static_src, index_src )
+        .pipe(gulp.dest(config.path.DEST));
 });
