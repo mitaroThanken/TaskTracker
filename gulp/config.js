@@ -22,7 +22,7 @@ module.exports = {
      * @type {Object}
      */
     release: {
-        depends: [ 'js-release', 'css', 'copy', 'useref' ]
+        depends: [ 'js-release', 'useref' ]
     },
 
     /**
@@ -38,7 +38,6 @@ module.exports = {
      * @type {Object}
      */
     copy: {
-        depends: ['clean'],
 	src: [src + '/*.html', src + '/images/**' ],
 	dest: dest,
 	base: src
@@ -49,8 +48,10 @@ module.exports = {
      * @type {Object}
      */
     css: {
-        depends: ['clean'],
-        src: src + '/stylus/*.styl',
+        src: {
+	    styl: src + '/stylus/*.styl',
+	    css: src + '/css/*.css'
+	},
 	dest: dest + '/css'
     },
 
@@ -60,23 +61,27 @@ module.exports = {
      * @type {Object}
      */
     js: {
-        depends: ['clean'],
 	target: {
             app: {
                 src: src + '/js/app.js',
 	        bundle: 'TodoAppBundle.js',
+		browserify: {
+		    bundleExternal: true,
+		    debug: true
+		},
 		transform: ['reactify']
 	    },
             index: {
                 src: src + '/js/index.js',
 	        bundle: 'index.js',
+		browserify: {
+                    bundleExternal: false,
+		    debug: true
+		},
 		transform: []
 	    },
 	},
-	dest: dest + '/js',
-	browserify: {
-            debug: true
-	}
+	dest: dest + '/js'
     },
 
     /**
@@ -84,7 +89,8 @@ module.exports = {
      * @type {Object}
      */
     useref: {
-        src: src + '/*.html',
+	depends: ['css', 'copy'],
+        src: dest + '/*.html',
 	dest: dest
     },
 
