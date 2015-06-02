@@ -101,7 +101,7 @@ module.exports = {
     watch: {
         depends: ['css', 'watchify'],
 	css: {
-            src: [ src + '/stylus/*.styl', '!' + src + '/css/*.css' ],
+            src: [ src + '/stylus/*.styl', src + '/css/*.css' ],
 	    task: ['css']
 	}
     },
