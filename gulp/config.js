@@ -108,10 +108,39 @@ module.exports = {
      * @type {Object}
      */
     watch: {
-        depends: ['css', 'watchify'],
+        depends: ['build', 'watchify'],
 	css: {
             src: [ src + '/stylus/*.styl', src + '/css/*.css' ],
 	    task: ['css']
+	}
+    },
+
+    /**
+     * live 用スクリプトインジェクション
+     * @type {Object}
+     */
+    inject: {
+        depends: ['build'],
+        target: 'data/TodoApp.html',
+	source: ['data/js/TodoAppBundle.js'],
+	sourceOption: {read: false},
+	injectOption: {relative: true},
+	dest: 'data'
+    },
+
+    /**
+     * React+Flux ライブリロード
+     * @type {Object}
+     */
+    live: {
+        depends: ['watch','inject'],
+	src: 'data',
+	options: {
+            livereload: true,
+	    directoryListing: false,
+	    fallback: 'TodoApp.html',
+	    port: 10800,
+	    open: true
 	}
     },
 
