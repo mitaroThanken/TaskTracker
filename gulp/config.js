@@ -22,7 +22,7 @@ module.exports = {
      * @type {Object}
      */
     release: {
-        depends: [ 'js-release', 'useref' ]
+        depends: [ 'js-release', 'combine' ]
     },
 
     /**
@@ -92,6 +92,15 @@ module.exports = {
 	depends: ['css', 'copy'],
         src: dest + '/*.html',
 	dest: dest
+    },
+
+    /**
+     * リリース用不要リソース削除
+     * @type {Object}
+     */
+    combine: {
+        depends: ['useref'],
+	css: [dest + '/css/*.css', '!' + dest + '/css/combined.css']
     },
 
     /**
