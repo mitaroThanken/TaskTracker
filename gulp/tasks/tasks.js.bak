@@ -1,0 +1,67 @@
+var gulp = require('gulp');
+var del = require('del');
+var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
+var browserify = require('browserify');
+var reactify = require('reactify');
+var uglify = require('gulp-uglify');
+var sourcemaps = require('gulp-sourcemaps');
+var duration = require('gulp-duration');
+var mergeStream = require('merge-stream');
+
+var config = require('./config.json');
+
+gulp.task('clean', function(cb) {
+    return del([
+        config.path.DEST + '/**/*'
+    ], cb);
+});
+
+gulp.task('js', function() {
+});
+
+gulp.task('js-release', function() {
+});
+
+gulp.task('js-watchify', function() {
+});
+
+
+function compile( entries, out, isUglify, isWatch ) {
+    var bundler = null;
+
+    if ( isWatch ) {
+      var option = config.browserify;
+      option.cache = {};
+      option.packageCache = {};
+      option.fullPaths = true;
+
+      bundler = watchify( browserify( entries, option ));
+    } else {
+      bundler = browserify( entries, config.browserify );
+    }
+
+    function bundle() {
+        return bundler
+            .transform: [ reactify ]
+	    .bundle()
+	    .pipe(source( out ))
+	    .pipe(buffer())
+            .pipe(sourcemaps.init({loadmaps: true}))
+            .pipe(sourcemaps.write('.',
+                 { sourceMappingURLPrefix: 
+                     'resource://tasktracker/' + config.path.DEST }));
+    }
+
+    bundler.on( 'update', bundle );
+	    
+    return bundle();
+};
+
+gulp.task('deploy-debug', function() {
+    var static_src = gulp.src( config.path.STATIC, {base: config.path.BASE} );
+    var appjs = compile( config.path.APP_JS, config.path.OUT, false );
+    var indexjs = gulp.src( config.path.INDEX_JS, {base: config.path.BASE} );
+    return mergeStream( static_src, appjs, indexjs )
+        .pipe(gulp.dest(config.path.DEST));
+});

@@ -25,18 +25,32 @@
     "react-bootstrap": "^0.22.6"
   },
   "devDependencies": {
-    "browserify": "^10.2.1",
+    "browserify": "^10.2.3",
+    "del": "^1.2.0",
     "envify": "^3.4.0",
+    "gulp": "^3.8.11",
+    "gulp-duration": "0.0.0",
+    "gulp-if": "^1.2.5",
+    "gulp-inject": "^1.2.0",
+    "gulp-load-plugins": "^0.10.0",
+    "gulp-minify-css": "^1.1.4",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-stylus": "^2.0.3",
+    "gulp-uglify": "^1.2.0",
+    "gulp-useref": "^1.2.0",
+    "gulp-util": "^3.0.5",
+    "gulp-webserver": "^0.9.1",
     "jest-cli": "^0.4.5",
+    "merge-stream": "^0.1.7",
     "reactify": "^1.1.1",
-    "uglify-js": "^2.4.22",
+    "require-dir": "^0.3.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.2.1"
   },
   "scripts": {
-    "start-index": "watchify -o data/js/index.js -v -d src/index.js --no-bundle-external",
-    "build-index": "browserify ./src/index.js -t [ envify --NODE_ENV production ] --no-bundle-external | uglifyjs -cm > data/js/index.min.js",
-    "start-app": "watchify -o data/js/TodoAppBundle.js -v -d src/app.js",
-    "build-app": "browserify ./src/app.js -t [ envify --NODE_ENV production ] | uglifyjs -cm > data/js/TodoAppBundle.min.js",
     "test": "jest"
   },
   "browserify": {
