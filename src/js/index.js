@@ -1,11 +1,19 @@
 var data = require("sdk/self").data;
-// Construct a panel, loading its content from the "text-entry.html"
-// file in the "data" directory, and loading the "get-text.js" script
-// into it.
-var text_entry = require("sdk/panel").Panel({
+
+var googleApi = require("./googleApi");
+
+var appPanel = require("sdk/panel").Panel({
   contentURL: data.url("TodoApp.html"),
   contentScriptFile: data.url("js/TodoAppBundle.js"),
   onHide: handleHide
+});
+
+function refreshTokenCallback(token) {
+    console.log('Got an OAuth token: ' + token + '\n');
+};
+
+appPanel.port.on('login', function() {
+    googleApi.refreshToken(refreshTokenCallback);
 });
 
 // Create a button
@@ -22,7 +30,7 @@ var button = require("sdk/ui/button/toggle").ToggleButton({
 
 function handleChange(state) {
   if (state.checked) {
-    text_entry.show({
+    appPanel.show({
       position: button
     });
   }

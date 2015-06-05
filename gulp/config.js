@@ -80,6 +80,15 @@ module.exports = {
 		},
 		transform: []
 	    },
+            login: {
+                src: src + '/js/login.js',
+	        bundle: 'login.js',
+		browserify: {
+                    bundleExternal: false,
+		    debug: true
+		},
+		transform: []
+	    }
 	},
 	dest: dest + '/js'
     },
