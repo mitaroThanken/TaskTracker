@@ -1,0 +1,3 @@
+[submodule "src/firefox-addons"]
+	path = src/firefox-addons
+	url = git@github.com:mitaroThanken/firefox-addons.git

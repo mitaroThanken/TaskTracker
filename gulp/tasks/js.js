@@ -19,9 +19,18 @@ gulp.task('app-js', function() {
 }); 
 
 /**
+ * デバッグ用コンパイルおよび配置（ログイン）
+ */
+gulp.task('login-js', function() {
+    var config = require('../config').js;
+
+    return compile(config.target.login, false);
+}); 
+
+/**
  * デバッグ用コンパイルおよび配置
  */
-gulp.task('js', ['index-js', 'app-js']);
+gulp.task('js', ['index-js', 'app-js', 'login-js']);
 
 /**
  * リリース用コンパイルおよび配置（エントリーポイント）
@@ -42,9 +51,19 @@ gulp.task('app-js-release', function() {
 }); 
 
 /**
+ * リリース用コンパイルおよび配置（ログイン）
+ */
+gulp.task('login-js-release', function() {
+    var config = require('../config').js;
+
+    return compile(config.target.login, true);
+}); 
+
+/**
  * リリース用コンパイルおよび配置
  */
-gulp.task('js-release', ['index-js-release', 'app-js-release']);
+gulp.task('js-release', 
+	  ['index-js-release', 'app-js-release', 'login-js-release']);
 
 /**
  * リリース用コンパイルおよび配置（エントリーポイント）
@@ -65,9 +84,19 @@ gulp.task('app-js-watchify', function() {
 }); 
 
 /**
+ * リリース用コンパイルおよび配置（ログイン）
+ */
+gulp.task('login-js-watchify', function() {
+    var config = require('../config').js;
+
+    return compile(config.target.login, false, true);
+}); 
+
+/**
  * リリース用コンパイルおよび配置
  */
-gulp.task('watchify', ['index-js-watchify', 'app-js-watchify']);
+gulp.task('watchify', 
+	  ['index-js-watchify', 'app-js-watchify', 'login-js-watchify']);
 
 /**
  * Javascript の依存関係を解決し、単一ファイルにコンパイル

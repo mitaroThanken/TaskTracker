@@ -1,2 +1,5 @@
 node_modules/
+data/js/index.js
+data/js/index.js.map
+src/js/secret/
 *.swp
