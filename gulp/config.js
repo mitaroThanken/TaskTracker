@@ -64,7 +64,7 @@ module.exports = {
 	target: {
             app: {
                 src: src + '/js/app.js',
-	        bundle: 'TodoAppBundle.js',
+	        bundle: 'AppBundle.js',
 		browserify: {
 		    bundleExternal: true,
 		    debug: true
@@ -130,8 +130,8 @@ module.exports = {
      */
     inject: {
         depends: ['build'],
-        target: 'data/TodoApp.html',
-	source: ['data/js/TodoAppBundle.js'],
+        target: 'data/App.html',
+	source: ['data/js/AppBundle.js'],
 	sourceOption: {read: false},
 	injectOption: {relative: true},
 	dest: 'data'
@@ -147,7 +147,7 @@ module.exports = {
 	options: {
             livereload: true,
 	    directoryListing: false,
-	    fallback: 'TodoApp.html',
+	    fallback: 'App.html',
 	    port: 10800,
 	    open: true
 	}

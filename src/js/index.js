@@ -3,8 +3,8 @@ var data = require("sdk/self").data;
 var googleApi = require("./googleApi");
 
 var appPanel = require("sdk/panel").Panel({
-  contentURL: data.url("TodoApp.html"),
-  contentScriptFile: data.url("js/TodoAppBundle.js"),
+  contentURL: data.url("App.html"),
+  contentScriptFile: data.url("js/AppBundle.js"),
   onHide: handleHide
 });
 
