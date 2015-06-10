@@ -4,3 +4,6 @@
 [submodule "src/Honoka"]
 	path = src/Honoka
 	url = git@github.com:windyakin/Honoka.git
+[submodule "src/jquery"]
+	path = src/jquery
+	url = git://github.com/jquery/jquery.git
