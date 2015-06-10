@@ -38,7 +38,10 @@ module.exports = {
      * @type {Object}
      */
     copy: {
-	src: [src + '/*.html', src + '/images/**' ],
+	src: [src + '/*.html', 
+              src + '/images/**',
+	      src + '/Honoka/dist/css/bootstrap.css',
+	      src + '/Honoka/dist/fonts/*'],
 	dest: dest,
 	base: src
     },
