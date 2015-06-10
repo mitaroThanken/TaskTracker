@@ -8,4 +8,4 @@ button.addEventListener('click', function() {
 },{}]},{},[1])
 
 
-//# sourceMappingURL=resource://tasktracker/data/js/TodoAppBundle.js.map
+//# sourceMappingURL=resource://tasktracker/data/js/AppBundle.js.map
