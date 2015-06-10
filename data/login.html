@@ -2,17 +2,21 @@
 <html>
     <head>
         <meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Google Login</title>
 	<!-- build:css css/combined.css -->
 	<link rel="stylesheet" href="./Honoka/dist/css/bootstrap.css">
 	<!-- endbuild -->
     </head>
     <body>
-        <label for="code">Code from Google:</label>
-        <input id="code" type="text">
-        <button id="submit">Login</button>
-	
-	<script src='./jquery/dist/jquery.min.js></script>
+	<div class="input-group input-group-lg">
+             <span class="input-group-addon">Code from Google:</span>
+             <input id="code" type="text" class="form-control">
+	     <span class="input-group-btn">
+                 <button id="submit" class="btn btn-default">Login</button>
+	     </span>
+	</div>
+	<script src="./jquery/dist/jquery.min.js"></script>
 	<script src="./Honoka/dist/js/bootstrap.min.js"></script>
     </body>
 </html>

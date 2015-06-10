@@ -41,6 +41,7 @@ module.exports = {
 	src: [src + '/*.html', 
               src + '/images/**',
 	      src + '/jquery/dist/jquery.min.*',
+	      src + '/Honoka/dist/js/bootstrap.min.js',
 	      src + '/Honoka/dist/css/bootstrap.css',
 	      src + '/Honoka/dist/fonts/*'],
 	dest: dest,
@@ -67,10 +68,7 @@ module.exports = {
     js: {
 	target: {
             app: {
-                src: [
-		  src + '/js/app.js',
-		  src + '/jquery/dist/jquery.min.js',
-		  src + '/Honoka/dist/js/bootstrap.min.js' ],
+                src: src + '/js/app.js',
 	        bundle: 'AppBundle.js',
 		browserify: {
 		    bundleExternal: true,

@@ -4,7 +4,11 @@ var googleApi = require("./googleApi");
 
 var appPanel = require("sdk/panel").Panel({
   contentURL: data.url("App.html"),
-  contentScriptFile: data.url("js/AppBundle.js"),
+  contentScriptFile: [
+    data.url("jquery/dist/jquery.min.js"),
+    data.url("Honoka/dist/js/bootstrap.min.js"),
+    data.url("js/AppBundle.js")
+  ],
   onHide: handleHide
 });
 
