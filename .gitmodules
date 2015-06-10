@@ -1,3 +1,6 @@
 [submodule "src/firefox-addons"]
 	path = src/firefox-addons
 	url = git@github.com:mitaroThanken/firefox-addons.git
+[submodule "src/Honoka"]
+	path = src/Honoka
+	url = git@github.com:windyakin/Honoka.git
