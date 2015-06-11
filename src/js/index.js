@@ -1,5 +1,7 @@
 var data = require("sdk/self").data;
 
+var Constants = require('./constants/TaskTrackerConstants');
+
 var googleApi = require("./googleApi");
 
 var appPanel = require("sdk/panel").Panel({
@@ -12,12 +14,10 @@ var appPanel = require("sdk/panel").Panel({
   onHide: handleHide
 });
 
-function refreshTokenCallback(token) {
-    console.log('Got an OAuth token: ' + token + '\n');
-};
-
-appPanel.port.on('login', function() {
-    googleApi.refreshToken(refreshTokenCallback);
+appPanel.port.on(Constants.TT_REFRESH_TOKEN, function() {
+    googleApi.refreshToken(function(token) {
+        appPanel.port.emit(Constants.TT_REFRESH_TOKEN_CALLBACK, token);
+    });
 });
 
 // Create a button
