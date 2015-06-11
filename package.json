@@ -19,7 +19,6 @@
   "dependencies": {
     "bootstrap": "^3.3.4",
     "flux": "^2.0.3",
-    "keymirror": "^0.1.1",
     "object-assign": "^2.0.0",
     "react": "^0.13.3",
     "react-bootstrap": "^0.22.6",
