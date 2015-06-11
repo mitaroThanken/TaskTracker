@@ -4,7 +4,7 @@ var Button = require('react-bootstrap').Button;
 
 var Actions = require('../actions/TaskTrackerActions');
 
-var App = React.createClass({
+var Auth = React.createClass({
     refreshToken: function() {
         Actions.refreshToken();
     },
@@ -21,4 +21,4 @@ var App = React.createClass({
     }
 });
 
-module.exports = App;
+module.exports = Auth;

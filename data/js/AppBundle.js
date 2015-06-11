@@ -30252,14 +30252,14 @@ router.run(function(Handler) {
     );
 });
 
-},{"./routing/router":"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/routing/router.js","react":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react/react.js"}],"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/components/App.react.js":[function(require,module,exports){
+},{"./routing/router":"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/routing/router.js","react":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react/react.js"}],"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/components/Auth.react.js":[function(require,module,exports){
 var React = require('react');
 var Jumbotron = require('react-bootstrap').Jumbotron;
 var Button = require('react-bootstrap').Button;
 
 var Actions = require('../actions/TaskTrackerActions');
 
-var App = React.createClass({displayName: "App",
+var Auth = React.createClass({displayName: "Auth",
     refreshToken: function() {
         Actions.refreshToken();
     },
@@ -30276,7 +30276,7 @@ var App = React.createClass({displayName: "App",
     }
 });
 
-module.exports = App;
+module.exports = Auth;
 
 },{"../actions/TaskTrackerActions":"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/actions/TaskTrackerActions.js","react":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react/react.js","react-bootstrap":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react-bootstrap/lib/index.js"}],"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/constants/TaskTrackerConstants.js":[function(require,module,exports){
 var keyMirror = require('../../keyMirror');
@@ -30344,17 +30344,17 @@ var React = require('react');
 var Route = require('react-router').Route;
 var DefaultRoute = require('react-router').DefaultRoute;
 
-var App = require('../components/App.react');
+var Auth = require('../components/Auth.react');
 
 var routes = (
     React.createElement(Route, {path: "/data/App.html"}, 
-        React.createElement(DefaultRoute, {handler: App})
+        React.createElement(DefaultRoute, {handler: Auth})
     )
 );
 
 module.exports = routes;
 
-},{"../components/App.react":"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/components/App.react.js","react":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react/react.js","react-router":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react-router/lib/index.js"}],"/Users/mitaro/Documents/GitRoot/TaskTracker/src/keyMirror/index.js":[function(require,module,exports){
+},{"../components/Auth.react":"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/components/Auth.react.js","react":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react/react.js","react-router":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react-router/lib/index.js"}],"/Users/mitaro/Documents/GitRoot/TaskTracker/src/keyMirror/index.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014 Facebook, Inc.
  *
