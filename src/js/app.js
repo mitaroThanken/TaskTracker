@@ -1,5 +1,9 @@
-var button = document.getElementById('start-button');
+var React = require('react');
+var router = require('./routing/router');
 
-button.addEventListener('click', function() {
-  self.port.emit('login');
+router.run(function(Handler) {
+    React.render(
+        <Handler />,
+	document.getElementById('app')
+    );
 });
