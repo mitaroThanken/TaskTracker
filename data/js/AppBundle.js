@@ -30228,6 +30228,8 @@ module.exports = require('./lib/React');
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var Constants = require('../constants/TaskTrackerConstants');
 
+var RouterContainer = require('../routing/RouterContainer');
+
 var TaskTrackerActions = {
 
     refreshToken: function() {
@@ -30237,32 +30239,64 @@ var TaskTrackerActions = {
 
 self.port.on(Constants.TT_REFRESH_TOKEN_CALLBACK, function(token) {
     console.log('Got an OAuth token: ' + token + '\n');
+    RouterContainer.get().transitionTo('/Main');
 });
 
 module.exports = TaskTrackerActions;
 
-},{"../constants/TaskTrackerConstants":"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/constants/TaskTrackerConstants.js","../dispatcher/AppDispatcher":"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/dispatcher/AppDispatcher.js"}],"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/app.js":[function(require,module,exports){
+},{"../constants/TaskTrackerConstants":"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/constants/TaskTrackerConstants.js","../dispatcher/AppDispatcher":"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/dispatcher/AppDispatcher.js","../routing/RouterContainer":"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/routing/RouterContainer.js"}],"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/app.js":[function(require,module,exports){
 var React = require('react');
-var router = require('./routing/router');
+var Router = require('react-router');
+var routes = require('./routing/routes');
+var RouterContainer = require('./routing/RouterContainer');
 
-router.run(function(Handler) {
+var router = Router.create({
+    routes: routes
+});
+
+RouterContainer.set(router);
+
+router.run(function(Root) {
     React.render(
-        React.createElement(Handler, null),
+        React.createElement(Root, null),
 	document.getElementById('app')
     );
 });
 
-},{"./routing/router":"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/routing/router.js","react":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react/react.js"}],"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/components/Auth.react.js":[function(require,module,exports){
+},{"./routing/RouterContainer":"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/routing/RouterContainer.js","./routing/routes":"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/routing/routes.js","react":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react/react.js","react-router":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react-router/lib/index.js"}],"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/components/App.react.js":[function(require,module,exports){
 var React = require('react');
+var Router = require('react-router');
+var RouteHandler = require('react-router').RouteHandler;
+
+var App = React.createClass({displayName: "App",
+    mixins: [ Router.State ],
+
+    render: function() {
+        return (
+            React.createElement("div", null, 
+	        React.createElement(RouteHandler, null)
+	    )
+	);
+    }
+});
+
+module.exports = App;
+
+},{"react":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react/react.js","react-router":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react-router/lib/index.js"}],"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/components/Auth.react.js":[function(require,module,exports){
+var React = require('react');
+var Router = require('react-router');
 var Jumbotron = require('react-bootstrap').Jumbotron;
 var Button = require('react-bootstrap').Button;
 
 var Actions = require('../actions/TaskTrackerActions');
 
 var Auth = React.createClass({displayName: "Auth",
+    mixins: [ Router.State ],
+
     refreshToken: function() {
         Actions.refreshToken();
     },
+
     render: function() {
         return (
             React.createElement("div", null, 
@@ -30278,7 +30312,33 @@ var Auth = React.createClass({displayName: "Auth",
 
 module.exports = Auth;
 
-},{"../actions/TaskTrackerActions":"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/actions/TaskTrackerActions.js","react":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react/react.js","react-bootstrap":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react-bootstrap/lib/index.js"}],"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/constants/TaskTrackerConstants.js":[function(require,module,exports){
+},{"../actions/TaskTrackerActions":"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/actions/TaskTrackerActions.js","react":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react/react.js","react-bootstrap":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react-bootstrap/lib/index.js","react-router":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react-router/lib/index.js"}],"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/components/Main.react.js":[function(require,module,exports){
+var React = require('react');
+var Router = require('react-router');
+var Jumbotron = require('react-bootstrap').Jumbotron;
+var Button = require('react-bootstrap').Button;
+
+var Actions = require('../actions/TaskTrackerActions');
+
+var Main = React.createClass({displayName: "Main",
+    mixins: [ Router.State ],
+    
+    render: function() {
+        return (
+            React.createElement("div", null, 
+	        React.createElement(Jumbotron, null, 
+	            React.createElement("h1", null, "Task Tracker"), 
+		    React.createElement("p", null, "メイン画面"), 
+		    React.createElement("p", null, React.createElement(Button, {bsStyle: "primary", bsSize: "large", disabled: true}, "dummy"))
+                )
+            )
+	);
+    }
+});
+
+module.exports = Main;
+
+},{"../actions/TaskTrackerActions":"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/actions/TaskTrackerActions.js","react":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react/react.js","react-bootstrap":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react-bootstrap/lib/index.js","react-router":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react-router/lib/index.js"}],"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/constants/TaskTrackerConstants.js":[function(require,module,exports){
 var keyMirror = require('../../keyMirror');
 
 module.exports = keyMirror({
@@ -30304,57 +30364,38 @@ var Dispatcher = require('flux').Dispatcher;
 
 module.exports = new Dispatcher();
 
-},{"flux":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/flux/index.js"}],"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/routing/router.js":[function(require,module,exports){
-var routes = require('./routes');
-var Router = require('react-router');
-
-var router = Router.create({
-    routes: routes,
-    location: Router.HistoryLocation
-});
+},{"flux":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/flux/index.js"}],"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/routing/RouterContainer.js":[function(require,module,exports){
+// RouterContainer.js
+var _router = null;
 
 module.exports = {
-    makePath: function(to, params, query) {
-        return router.makePath(to, params, query);
+    set: function(router) {
+         _router = router;
     },
-
-    makeHref: function(to, params, query) {
-        return router.makeHref(to, params, query);
-    },
-
-    transitionTo: function(to, params, query) {
-        router.transitionTo(to, params, query);
-    },
-
-    replaseWith: function(to, params, query) {
-        router.replaceWith(to, params, query);
-    },
-
-    goBack: function() {
-        router.goBack();
-    },
-
-    run: function(render) {
-        router.run(render);
+    get: function() {
+         return _router;
     }
 };
 
-},{"./routes":"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/routing/routes.js","react-router":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react-router/lib/index.js"}],"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/routing/routes.js":[function(require,module,exports){
+},{}],"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/routing/routes.js":[function(require,module,exports){
 var React = require('react');
 var Route = require('react-router').Route;
 var DefaultRoute = require('react-router').DefaultRoute;
 
+var App = require('../components/App.react');
 var Auth = require('../components/Auth.react');
+var Main = require('../components/Main.react');
 
 var routes = (
-    React.createElement(Route, {path: "/data/App.html"}, 
+    React.createElement(Route, {path: "/", handler: App}, 
+        React.createElement(Route, {name: "Main", handler: Main}), 
         React.createElement(DefaultRoute, {handler: Auth})
     )
 );
 
 module.exports = routes;
 
-},{"../components/Auth.react":"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/components/Auth.react.js","react":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react/react.js","react-router":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react-router/lib/index.js"}],"/Users/mitaro/Documents/GitRoot/TaskTracker/src/keyMirror/index.js":[function(require,module,exports){
+},{"../components/App.react":"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/components/App.react.js","../components/Auth.react":"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/components/Auth.react.js","../components/Main.react":"/Users/mitaro/Documents/GitRoot/TaskTracker/src/js/components/Main.react.js","react":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react/react.js","react-router":"/Users/mitaro/Documents/GitRoot/TaskTracker/node_modules/react-router/lib/index.js"}],"/Users/mitaro/Documents/GitRoot/TaskTracker/src/keyMirror/index.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014 Facebook, Inc.
  *

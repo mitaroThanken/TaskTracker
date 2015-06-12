@@ -1,9 +1,17 @@
 var React = require('react');
-var router = require('./routing/router');
+var Router = require('react-router');
+var routes = require('./routing/routes');
+var RouterContainer = require('./routing/RouterContainer');
 
-router.run(function(Handler) {
+var router = Router.create({
+    routes: routes
+});
+
+RouterContainer.set(router);
+
+router.run(function(Root) {
     React.render(
-        <Handler />,
+        <Root />,
 	document.getElementById('app')
     );
 });
