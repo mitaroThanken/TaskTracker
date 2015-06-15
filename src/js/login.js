@@ -1,4 +1,5 @@
-var button=document.getElementById("submit");
-button.addEventListener("click",function(){
+var button=document.getElementById("input-form");
+button.addEventListener("submit",function(){
     self.postMessage(document.getElementById("code").value);
+    return false;
 });
