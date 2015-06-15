@@ -7,3 +7,6 @@
 [submodule "src/jquery"]
 	path = src/jquery
 	url = git://github.com/jquery/jquery.git
+[submodule "src/keyMirror"]
+	path = src/keyMirror
+	url = git@github.com:STRML/keyMirror.git
