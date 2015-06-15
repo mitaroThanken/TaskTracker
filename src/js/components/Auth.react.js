@@ -12,6 +12,10 @@ var Auth = React.createClass({
         Actions.refreshToken();
     },
 
+    componentDidMount: function() {
+        this.refreshToken();
+    },
+
     render: function() {
         return (
             <div>
