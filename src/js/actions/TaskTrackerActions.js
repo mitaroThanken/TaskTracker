@@ -12,7 +12,7 @@ var TaskTrackerActions = {
 
 self.port.on(Constants.TT_REFRESH_TOKEN_CALLBACK, function(token) {
   console.log('Got an OAuth token: ' + token + '\n');
-  if (typeof token === undefined) return; // 承認コードが取得できなかった
+  if ((token === null) || (typeof token === undefined)) return; // 承認コードが取得できなかった
   RouterContainer.get().transitionTo('/Main');
 });
 
