@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Google Login</title>
-	<!-- build:css css/combined.css -->
-	<link rel="stylesheet" href="./Honoka/dist/css/bootstrap.css">
-	<!-- endbuild -->
-    </head>
-    <body>
-        <form id="input-form">
-          <div class="input-group input-group-lg">
-            <span class="input-group-addon">Code from Google:</span>
-            <input id="code" type="text" class="form-control">
-	    <span class="input-group-btn">
-              <button id="submit" class="btn btn-primary" type="submit">Login</button>
-	    </span>
-          </div>
-	</form>
-	<script src="./jquery/dist/jquery.min.js"></script>
-	<script src="./Honoka/dist/js/bootstrap.min.js"></script>
-    </body>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Google Login</title>
+  <!-- build:css css/combined.css -->
+  <link rel="stylesheet" href="./Honoka/dist/css/bootstrap.css">
+  <!-- endbuild -->
+</head>
+
+<body>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h1 class="panel-title">Google OAuth 2.0 Authorization code</h1>
+    </div>
+    <div class="panel-body">
+      <form id="input-form" class="form-inline">
+        <div class="form-group form-group-lg">
+          <label for="code">Code from Google:</label>
+          <input id="code" type="text" class="form-control">
+        </div>
+        <button id="submit" class="btn btn-lg btn-primary" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+  <script src="./jquery/dist/jquery.min.js"></script>
+  <script src="./Honoka/dist/js/bootstrap.min.js"></script>
+</body>
+
 </html>
