@@ -30225,6 +30225,8 @@ module.exports = warning;
 module.exports = require('./lib/React');
 
 },{"./lib/React":140}],268:[function(require,module,exports){
+'use strict';
+
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var Constants = require('../constants/TaskTrackerConstants');
 
@@ -30232,58 +30234,63 @@ var RouterContainer = require('../routing/RouterContainer');
 
 var TaskTrackerActions = {
 
-    refreshToken: function() {
-        self.port.emit(Constants.TT_REFRESH_TOKEN);
-    }
+  refreshToken: function refreshToken() {
+    self.port.emit(Constants.TT_REFRESH_TOKEN);
+  }
 };
 
-self.port.on(Constants.TT_REFRESH_TOKEN_CALLBACK, function(token) {
-    console.log('Got an OAuth token: ' + token + '\n');
-    if (typeof token === undefined) return; // 承認コードが取得できなかった
-    RouterContainer.get().transitionTo('/Main');
+self.port.on(Constants.TT_REFRESH_TOKEN_CALLBACK, function (token) {
+  console.log('Got an OAuth token: ' + token + '\n');
+  if (typeof token === undefined) return; // 承認コードが取得できなかった
+  RouterContainer.get().transitionTo('/Main');
 });
 
 module.exports = TaskTrackerActions;
 
 },{"../constants/TaskTrackerConstants":273,"../dispatcher/AppDispatcher":274,"../routing/RouterContainer":275}],269:[function(require,module,exports){
+'use strict';
+
 var React = require('react');
 var Router = require('react-router');
 var routes = require('./routing/routes');
 var RouterContainer = require('./routing/RouterContainer');
 
 var router = Router.create({
-    routes: routes
+  routes: routes
 });
 
 RouterContainer.set(router);
 
-router.run(function(Root) {
-    React.render(
-        React.createElement(Root, null),
-	document.getElementById('app')
-    );
+router.run(function (Root) {
+  React.render(React.createElement(Root, null), document.getElementById('app'));
 });
 
 },{"./routing/RouterContainer":275,"./routing/routes":276,"react":267,"react-router":99}],270:[function(require,module,exports){
+'use strict';
+
 var React = require('react');
 var Router = require('react-router');
 var RouteHandler = require('react-router').RouteHandler;
 
-var App = React.createClass({displayName: "App",
-    mixins: [ Router.State ],
+var App = React.createClass({
+  displayName: 'App',
 
-    render: function() {
-        return (
-            React.createElement("div", null, 
-	        React.createElement(RouteHandler, null)
-	    )
-	);
-    }
+  mixins: [Router.State],
+
+  render: function render() {
+    return React.createElement(
+      'div',
+      null,
+      React.createElement(RouteHandler, null)
+    );
+  }
 });
 
 module.exports = App;
 
 },{"react":267,"react-router":99}],271:[function(require,module,exports){
+'use strict';
+
 var React = require('react');
 var Router = require('react-router');
 var Jumbotron = require('react-bootstrap').Jumbotron;
@@ -30291,33 +30298,55 @@ var Button = require('react-bootstrap').Button;
 
 var Actions = require('../actions/TaskTrackerActions');
 
-var Auth = React.createClass({displayName: "Auth",
-    mixins: [ Router.State ],
+var Auth = React.createClass({
+  displayName: 'Auth',
 
-    refreshToken: function() {
-        Actions.refreshToken();
-    },
+  mixins: [Router.State],
 
-    componentDidMount: function() {
-        this.refreshToken();
-    },
+  refreshToken: function refreshToken() {
+    Actions.refreshToken();
+  },
 
-    render: function() {
-        return (
-            React.createElement("div", null, 
-	        React.createElement(Jumbotron, null, 
-	            React.createElement("h1", null, "Task Tracker"), 
-		    React.createElement("p", null, "Googleカレンダーへのアクセスを承認してください。"), 
-		    React.createElement("p", null, React.createElement(Button, {bsStyle: "primary", bsSize: "large", onClick: this.refreshToken}, "ログイン・承認"))
-                )
-            )
-	);
-    }
+  componentDidMount: function componentDidMount() {
+    this.refreshToken();
+  },
+
+  render: function render() {
+    return React.createElement(
+      'div',
+      null,
+      React.createElement(
+        Jumbotron,
+        null,
+        React.createElement(
+          'h1',
+          null,
+          'Task Tracker'
+        ),
+        React.createElement(
+          'p',
+          null,
+          'Googleカレンダーへのアクセスを承認してください。'
+        ),
+        React.createElement(
+          'p',
+          null,
+          React.createElement(
+            Button,
+            { bsSize: 'large', bsStyle: 'primary', onClick: this.refreshToken },
+            'ログイン・承認'
+          )
+        )
+      )
+    );
+  }
 });
 
 module.exports = Auth;
 
 },{"../actions/TaskTrackerActions":268,"react":267,"react-bootstrap":62,"react-router":99}],272:[function(require,module,exports){
+'use strict';
+
 var React = require('react');
 var Router = require('react-router');
 var Jumbotron = require('react-bootstrap').Jumbotron;
@@ -30325,25 +30354,47 @@ var Button = require('react-bootstrap').Button;
 
 var Actions = require('../actions/TaskTrackerActions');
 
-var Main = React.createClass({displayName: "Main",
-    mixins: [ Router.State ],
-    
-    render: function() {
-        return (
-            React.createElement("div", null, 
-	        React.createElement(Jumbotron, null, 
-	            React.createElement("h1", null, "Task Tracker"), 
-		    React.createElement("p", null, "メイン画面"), 
-		    React.createElement("p", null, React.createElement(Button, {bsStyle: "primary", bsSize: "large", disabled: true}, "dummy"))
-                )
-            )
-	);
-    }
+var Main = React.createClass({
+  displayName: 'Main',
+
+  mixins: [Router.State],
+
+  render: function render() {
+    return React.createElement(
+      'div',
+      null,
+      React.createElement(
+        Jumbotron,
+        null,
+        React.createElement(
+          'h1',
+          null,
+          'Task Tracker'
+        ),
+        React.createElement(
+          'p',
+          null,
+          'メイン画面'
+        ),
+        React.createElement(
+          'p',
+          null,
+          React.createElement(
+            Button,
+            { bsSize: 'large', bsStyle: 'primary', disabled: true },
+            'dummy'
+          )
+        )
+      )
+    );
+  }
 });
 
 module.exports = Main;
 
 },{"../actions/TaskTrackerActions":268,"react":267,"react-bootstrap":62,"react-router":99}],273:[function(require,module,exports){
+'use strict';
+
 var keyMirror = require('../../keyMirror');
 
 module.exports = keyMirror({
@@ -30365,24 +30416,30 @@ module.exports = keyMirror({
  * A singleton that operates as the central hub for application updates.
  */
 
+'use strict';
+
 var Dispatcher = require('flux').Dispatcher;
 
 module.exports = new Dispatcher();
 
 },{"flux":2}],275:[function(require,module,exports){
 // RouterContainer.js
+"use strict";
+
 var _router = null;
 
 module.exports = {
-    set: function(router) {
-         _router = router;
-    },
-    get: function() {
-         return _router;
-    }
+  set: function set(router) {
+    _router = router;
+  },
+  get: function get() {
+    return _router;
+  }
 };
 
 },{}],276:[function(require,module,exports){
+'use strict';
+
 var React = require('react');
 var Route = require('react-router').Route;
 var DefaultRoute = require('react-router').DefaultRoute;
@@ -30391,11 +30448,11 @@ var App = require('../components/App.react');
 var Auth = require('../components/Auth.react');
 var Main = require('../components/Main.react');
 
-var routes = (
-    React.createElement(Route, {path: "/", handler: App}, 
-        React.createElement(Route, {name: "Main", handler: Main}), 
-        React.createElement(DefaultRoute, {handler: Auth})
-    )
+var routes = React.createElement(
+  Route,
+  { handler: App, path: '/' },
+  React.createElement(Route, { handler: Main, name: 'Main' }),
+  React.createElement(DefaultRoute, { handler: Auth })
 );
 
 module.exports = routes;
