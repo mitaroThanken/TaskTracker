@@ -7,9 +7,9 @@ var Auth = require('../components/Auth.react');
 var Main = require('../components/Main.react');
 
 var routes = (
-    <Route path='/' handler={App}>
-        <Route name='Main' handler={Main} />
-        <DefaultRoute handler={Auth} />
+    <Route handler={App} path='/'>
+      <Route handler={Main} name='Main'/>
+      <DefaultRoute handler={Auth}/>
     </Route>
 );
 

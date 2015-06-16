@@ -3,15 +3,15 @@ var Router = require('react-router');
 var RouteHandler = require('react-router').RouteHandler;
 
 var App = React.createClass({
-    mixins: [ Router.State ],
+  mixins: [Router.State],
 
-    render: function() {
-        return (
-            <div>
-	        <RouteHandler/>
-	    </div>
-	);
-    }
+  render: function () {
+    return (
+      <div>
+        <RouteHandler/>
+      </div>
+    );
+  }
 });
 
 module.exports = App;

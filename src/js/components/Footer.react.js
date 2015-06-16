@@ -20,7 +20,7 @@ var Footer = React.createClass({
   /**
    * @return {object}
    */
-  render: function() {
+  render: function () {
     var allTodos = this.props.allTodos;
     var total = Object.keys(allTodos).length;
 
@@ -42,23 +42,20 @@ var Footer = React.createClass({
     // Undefined and thus not rendered if no completed items are left.
     var clearCompletedButton;
     if (completed) {
-      clearCompletedButton =
-        <button
-          id="clear-completed"
-          onClick={this._onClearCompletedClick}>
-          Clear completed ({completed})
-        </button>;
+      clearCompletedButton = <button id="clear-completed" onClick={this._onClearCompletedClick}>
+        Clear completed ({completed})
+      </button>;
     }
 
-  	return (
+    return (
       <footer id="footer">
         <span id="todo-count">
           <strong>
             {itemsLeft}
           </strong>
-          {itemsLeftPhrase}
+            {itemsLeftPhrase}
         </span>
-        {clearCompletedButton}
+          {clearCompletedButton}
       </footer>
     );
   },
@@ -66,7 +63,7 @@ var Footer = React.createClass({
   /**
    * Event handler to delete all completed TODOs
    */
-  _onClearCompletedClick: function() {
+  _onClearCompletedClick: function () {
     TodoActions.destroyCompleted();
   }
 

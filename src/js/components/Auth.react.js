@@ -6,27 +6,27 @@ var Button = require('react-bootstrap').Button;
 var Actions = require('../actions/TaskTrackerActions');
 
 var Auth = React.createClass({
-    mixins: [ Router.State ],
+  mixins: [Router.State],
 
-    refreshToken: function() {
-        Actions.refreshToken();
-    },
+  refreshToken: function () {
+    Actions.refreshToken();
+  },
 
-    componentDidMount: function() {
-        this.refreshToken();
-    },
+  componentDidMount: function () {
+    this.refreshToken();
+  },
 
-    render: function() {
-        return (
-            <div>
-	        <Jumbotron>
-	            <h1>Task Tracker</h1>
-		    <p>Googleカレンダーへのアクセスを承認してください。</p>
-		    <p><Button bsStyle='primary' bsSize='large' onClick={this.refreshToken}>ログイン・承認</Button></p>
-                </Jumbotron>
-            </div>
-	);
-    }
+  render: function () {
+    return (
+      <div>
+        <Jumbotron>
+          <h1>Task Tracker</h1>
+          <p>Googleカレンダーへのアクセスを承認してください。</p>
+          <p><Button bsSize='large' bsStyle='primary' onClick={this.refreshToken}>ログイン・承認</Button></p>
+        </Jumbotron>
+      </div>
+    );
+  }
 });
 
 module.exports = Auth;
