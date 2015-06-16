@@ -30,38 +30,35 @@ function getTodoState() {
 
 var TodoApp = React.createClass({
 
-  getInitialState: function() {
+  getInitialState: function () {
     return getTodoState();
   },
 
-  componentDidMount: function() {
+  componentDidMount: function () {
     TodoStore.addChangeListener(this._onChange);
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount: function () {
     TodoStore.removeChangeListener(this._onChange);
   },
 
   /**
    * @return {object}
    */
-  render: function() {
-  	return (
+  render: function () {
+    return (
       <div>
         <Header />
-        <MainSection
-          allTodos={this.state.allTodos}
-          areAllComplete={this.state.areAllComplete}
-        />
-        <Footer allTodos={this.state.allTodos} />
+        <MainSection allTodos={this.state.allTodos} areAllComplete={this.state.areAllComplete}/>
+        <Footer allTodos={this.state.allTodos}/>
       </div>
-  	);
+    );
   },
 
   /**
    * Event handler for 'change' events coming from the TodoStore
    */
-  _onChange: function() {
+  _onChange: function () {
     this.setState(getTodoState());
   }
 

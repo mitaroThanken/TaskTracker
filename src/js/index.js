@@ -15,9 +15,9 @@ var appPanel = require("sdk/panel").Panel({
 });
 
 appPanel.port.on(Constants.TT_REFRESH_TOKEN, function() {
-    googleApi.refreshToken(function(token) {
-        appPanel.port.emit(Constants.TT_REFRESH_TOKEN_CALLBACK, token);
-    });
+  googleApi.refreshToken(function(token) {
+    appPanel.port.emit(Constants.TT_REFRESH_TOKEN_CALLBACK, token);
+  });
 });
 
 // Create a button
@@ -41,5 +41,7 @@ function handleChange(state) {
 };
 
 function handleHide() {
-  button.state('window', {checked: false});
+  button.state('window', {
+    checked: false
+  });
 };
